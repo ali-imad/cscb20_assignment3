@@ -1,0 +1,9 @@
+#schedule {
+    overflow: auto;
+    flex-basis: 100%;
+    text-align: center;
+}
+
+#schedule iframe {
+    width: 100%;
+}

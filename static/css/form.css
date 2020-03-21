@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Cabin:600&display=swap');
+#feedback-form {
+    background-color: rgba(255, 255, 255, 0.747);
+    color: #414141;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    flex: 70%;
+}
+
+label {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-top: 6px;
+}
+
+input[type=submit] {
+    color: #ffffff;
+    background-color: #3700ff31;
+    cursor: pointer;
+    padding: 12px 20px;
+    font-size: x-large;
+    font-family: 'Cabin';
+    border: none;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(43, 69, 216);
+}
+
+input[value=Clear] {
+    background-color: rgba(255, 127, 80, 0.555);
+}
+
+input[value=Clear]:hover {
+    background-color: rgb(255, 127, 80);
+}
+
+#comments {
+    height: 50%;
+    flex: 6vw;
+    font-family: Cabin;
+    color: rgba(52, 52, 54, 0.904);
+    background-color: rgba(255, 255, 255, 0.445);
+}
+
+#visitor-category {
+    font-size: 1em;
+    font-family: Cabin;
+    border: 1px solid #202020;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+#buttons {
+    margin: 10px 0;
+    display: flex;
+}
+
+#buttons input{
+    flex: 50%;
+    margin: 0 2px;
+}
+
+@media (max-width: 1000px) {
+    #buttons input {
+        margin: 0;
+    }
+}
