@@ -6,3 +6,6 @@
 # pycharm
 __pycache__/
 __pycache__/*
+
+# webstorm
+.idea
