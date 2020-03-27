@@ -1,2 +1,11 @@
 # vscode workspace files
 *.code-workspace
+.vscode/
+.vscode/*
+
+# pycharm
+__pycache__/
+__pycache__/*
+
+# webstorm
+.idea

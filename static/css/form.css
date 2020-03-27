@@ -53,6 +53,13 @@ input[value=Clear]:hover {
     padding: 8px;
 }
 
+#login-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: 80vh;
+}
+
 #buttons {
     margin: 10px 0;
     display: flex;
