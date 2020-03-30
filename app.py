@@ -53,6 +53,18 @@ db.close()
 #link students to html
 """
 
+#Getting info from database based on login
+"""
+-- when you try to login (when user has already submitted username/password)
+sql = "SELECT * FROM _____(verification table)"
+
+results = query_db(sql, args=(), one=False)
+    for result in results:
+        if result[0] ==  request.form['id'] and result[1] == request.form['password']:
+            ...
+
+"""
+
 
 @app.route('/')
 def root():
