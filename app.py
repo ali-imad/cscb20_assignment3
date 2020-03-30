@@ -1,11 +1,13 @@
-import sqlite3, os
+import sqlite3, os, secrets, logging 
 
 from flask import Flask, flash, render_template, request, g, session, request, redirect, abort, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 app = Flask(__name__)
-app.secret_key = b'testsecret'  # keep this more secret
+app.secret_key = secrets.token_hex(16)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+
 
 # everything below this in the """""" i'm not using
 """
@@ -63,11 +65,9 @@ app.secret_key = b'testsecret'  # keep this more secret
 @app.route('/')
 def root():
     # cookie check
+    app.logger.error(session.get('student'), session.get('instructor'))
     if not (session.get('student') or session.get('instructor')):
         return render_template('login.html')
-        # return redirect(url_for("login"))
-        # that above statement is breaking, i'm not sure why
-        # redirect isn't playing nice
     return render_template('index.html')
 
 @app.route('/login', methods=['POST'])
@@ -79,16 +79,18 @@ def login():
     elif request.form['pw-login'] == 'instruct' and request.form['user-login'] == 'teach':
         session['instructor'] = True
         return redirect('/')
-    return render_template("login.html")
+    return render_template('login.html')
 
 @app.route('/logout')
 def logout():
     # this is non functional, redirect breaks it
     if session.get('student'):
+        app.logger.warning("YEP YUR A STUDENT")
         session.pop('student',None)
     elif session.get('instructor'):
+        app.logger.warning("YEP YUR A instructor")
         session.pop('instructor',None)
-    redirect(url_for("root"))
+    redirect('/')
 
 @app.route('/calendar')
 def calendar():
