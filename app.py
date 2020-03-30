@@ -61,7 +61,9 @@ sql = "SELECT * FROM _____(verification table)"
 results = query_db(sql, args=(), one=False)
     for result in results:
         if result[0] ==  request.form['id'] and result[1] == request.form['password']:
-            ...
+            #create session
+            #redirect to home page
+    #if no student id found, offer them chance to sign up
 
 """
 
