@@ -9,14 +9,16 @@
 <body>
 <div id="login-container">
     <div id="feedback-form">
-        <label for="user-login">Username</label>
-        <input type="text" id="visitor-category" placeholder="Enter Username" name="user-login" required>
+        <form method="POST" action="{{url_for('login')}}">
+            <label for="user-login">Username</label>
+            <input type="text" id="visitor-category" placeholder="Enter Username" name="user-login" required>
 
-        <label for="pw-login">Username</label>
-        <input type="password" id="visitor-category" placeholder="Enter Password" name="pw-login" required>
+            <label for="pw-login">Password</label>
+            <input type="password" id="visitor-category" placeholder="Enter Password" name="pw-login" required>
 
-        <input type="submit" value="Login">
-        <input type="submit" value="Clear">
+            <input type="submit" value="Login">
+            <input type="submit" value="Clear">
+        </form>
     </div>
 </div>
 </body>

@@ -9,3 +9,11 @@ __pycache__/*
 
 # webstorm
 .idea
+
+# venv
+env/
+env/*
+
+# other
+*.pdf
+db_test/
