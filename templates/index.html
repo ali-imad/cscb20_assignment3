@@ -67,14 +67,18 @@
     <div id="content">
 
 	  <h1 class="content-title" style="text-align: center;">CSCB20 - Introduction to Databases and Web Applications</h2>
-
       <div id="description" class="content-child">
         <h2 class="content-title">Course Description</h3>
         <p class="desc-paragraph">A practical introduction to databases and Web app development. Databases: terminology and applications; creating,
 		querying and updating databases; the entity-relationship model for database design. Web documents and applications:
 		static and interactive documents; Web servers and dynamic server-generated content; Web application development and
 		interface with databases.</p>
-        <p><a href="static/files/content.pdf" class="content-link">Syllabus</a></p>
+		<p><a href="static/files/content.pdf" class="content-link">Syllabus</a></p>
+		{% if is_studnet == true %}
+		<h4>Hello {{ student_info['Name'] }}, see your marks <a href="/marks">here</a></h4>
+		{% else %}
+		<h4>Hello, see all your students' marks <a href="/marks">here</a></h4>
+		{% endif %}
 	  </div>
 
 	  <div class="content-child">
