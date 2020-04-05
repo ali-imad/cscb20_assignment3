@@ -1,12 +1,53 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin:600&display=swap');
-#feedback-form {
-    background-color: rgba(255, 255, 255, 0.747);
-    color: #414141;
-    margin: 10px;
+#signin-content {
+    display: flex;
+    border-radius: 400px;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    align-self: center;
+    padding: 4vw 10vh;
+    background-image: url('img/escheresque-dark.png');
+}
+
+#register-box {
+    color:#414141;
+    flex: 1 20%;
+}
+
+.signin-child {
+    background-color: rgba(255, 255, 255, 0.547);
     padding: 10px;
+    margin: 10px;
+}
+
+#register-box a {
+    color: #6400c2;
+}
+
+.register-title {
+    color: #414141;
+}
+
+#login-box {
+    color: #414141;
     display: flex;
     flex-flow: column wrap;
-    flex: 70%;
+}
+
+#login-form {
+    flex: 5 60%;
+}
+
+#feedback-form {
+    background-color: rgba(255, 255, 255, 0.547);
+    color: #414141;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    flex: 90%;
 }
 
 label {
@@ -23,6 +64,7 @@ input[type=submit] {
     font-size: x-large;
     font-family: 'Cabin';
     border: none;
+    margin-top: 8px;
 }
 
 input[type=submit]:hover {
@@ -51,6 +93,13 @@ input[value=Clear]:hover {
     border: 1px solid #202020;
     border-radius: 4px;
     padding: 8px;
+}
+
+#login-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: 80vh;
 }
 
 #buttons {

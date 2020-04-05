@@ -1,266 +1,199 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>CSCB20 Home Page</title>
-	<link rel="stylesheet" type="text/css" href="static/css/lectures.css">
-	<link rel="stylesheet" type="text/css" href="static/css/index.css">
-	<link rel="stylesheet" type="text/css" href="static/css/scrollbar.css">
+{% extends "base.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="static/css/lectures.css">
+{% endblock %}
+{% block content %}
 
-</head>
-<body>
-	<nav>
-		<ul class="categories">
-			<li class="cat_item">
-				<a href="/" class="cat_link">Home</a>
-			</li>
-			<li class="cat_item">
-				<a href="/calendar" class="cat_link">Office Schedule</a>
-			</li>
-			<li class="cat_item">
-				<a href="/class-resources" class="cat_link">Class Resources</a>
-			</li>
-			<li class="cat_item">
-				<a href="https://piazza.com/class/k5l8ww7kz8l6f0" target="_blank" class="cat_link">Discussion Board</a></
-			</li>
-		</ul>
-	</nav>
-
-	<div id="main">
-		<div id="sidebar">
-			<div id="contact" class="sidebar-child">
-				<h3 class="content-title" style="text-align: left;">Instructor Information</h3>
-				<h4>Email: <a href="#">bretscher@utsc.utoronto.ca</a></h4>
-				<h4>Office: IC 493</h4>
-				<h4>Phone: (416) 208-4745</h4>
-				<h4>Lectures:	Mondays 9:15-11:00 in HW 216</h4>
-				<h4>Office Hours: Wednesday 11:00-12:00</h4>
-				<img src="static/css/img/Anna_Bretscher.jpg" style="order: -100">
-			</div>
-			<div id="news" class="sidebar-child">
-				<h3 class="content-title" style="margin-top: 3px;">News</h3>
-				<div class="news-item">
-					<h4>Assignment 3 Posted!</h4>
-					<p>03/14/2020</p>
-					<p>Assignment 3 is now posted on the resources page, please read through the handout carefully</p>
-				</div>
-				<div class="news-item">
-					<h4>Midterm Marks now on Markus</h4>
-					<p>03/04/2020</p>
-					<p>Midterm marks are now available on Markus, read through the solutions before asking for a regrade! The link to Markus is available in the Resources page</p>
-				</div>
-				<div class="news-item">
-					<h4>Midterm Mark Room Assignment</h4>
-					<p>02/18/2020</p>
-					<p>Room assignment for the upcoming miderm is now posted here: <a href="#">Room Assignment</a></p>
-				</div>
-				<div class="news-item">
-					<h4>Change in Office Hours</h4>
-					<p>03/04/2020</p>
-					<p>The Professor will be unable to hold OH normal times this week, please feel free to refer to you TA's in the meantime</p>
-				</div>
-			</div>
-        </div>
-
-		<div id="content">
-			<h1 class="content-title" style="text-align: center;">Lecture Schedule</h1>
-			<div id="lectures" class="content-child">
-				<h2 style="text-align: center; color: white;">Lectures</h2>
-				<!-- header div --->
-				<div id="table-row" style="font-weight: bold; color: white;">
-					<div class="table-content">
-						<h7>Week</h7>
-					</div>
-					<div class="table-content">
-						<h7>Topic</h7>
-					</div>
-					<div class="table-content">
-						<h7>Lab</h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>1</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Introduction to the Course</a></h7>
-					</div>
-					<div class="table-content">
-						<h7>-</h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>2</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Diagrams and Relational Algebra</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 1</a></h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>3</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Diagrams and Relational Algebra</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 2</a></h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>4</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">SQL and MySQL</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 3</a></h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>5</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">SQL queries, creating and editing tables</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 4</a></h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>6</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">MySQL Join Types, Views</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 5</a></h7>
-					</div>
-				</div>
-
-				<div id="table-row">
-					<div class="table-content">
-						<h7>7</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Intro to HTML, CSS</a></h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 6</a></h7>
-					</div>
-				</div>
-				<div id="table-row">
-					<div class="table-content">
-						<h7>8</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Intro to PHP</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 7</a></h7>
-					</div>
-				</div>
-				<div id="table-row">
-					<div class="table-content">
-						<h7>9</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">PHP and SQL</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 8</a></h7>
-					</div>
-				</div>
-				<div id="table-row">
-					<div class="table-content">
-						<h7>10</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">JS, Query</a></h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 9</a></h7>
-					</div>
-				</div>
-				<div id="table-row">
-					<div class="table-content">
-						<h7>11</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">jQuery, AJAX, JSON</a></h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 10</a></h7>
-					</div>
-				</div>
-				<div id="table-row">
-					<div class="table-content">
-						<h7>12</h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Past Final Exam</a> </h7>
-					</div>
-					<div class="table-content">
-						<h7><a href="files/content.pdf" target="_blank">Lab 11</a></h7>
-					</div>
-				</div>
-			</div>
-
-			<div id="other">
-				<div id="assignments" class="content-child">
-					<h2 style="text-align: center; color: white; padding-top: 10px;">Assignments</h2>
-					<div id="table-row" style="font-weight: bold; color: white;">
-						<div class="table-content"><h7>Assignment</h7></div>
-						<div class="table-content"><h7>Weight</h7></div>
-						<div class="table-content"><h7>Due Date</h7></div>
-					</div>
-					<div id="table-row">
-						<div class="table-content"><h7><a href="content.pdf">Assignment 1</a></h7></div>
-						<div class="table-content"><h7>10%</h7></div>
-						<div class="table-content"><h7>February 29</h7></div>
-					</div>
-					<div id="table-row">
-						<div class="table-content"><h7><a href="content.pdf">Assignment 2</a></h7></div>
-						<div class="table-content"><h7>15%</h7></div>
-						<div class="table-content"><h7>March 15</h7></div>
-					</div>
-					<div id="table-row">
-						<div class="table-content"><h7><a href="content.pdf">Assignment 3</a></h7></div>
-						<div class="table-content"><h7>15%</h7></div>
-						<div class="table-content"><h7>March 29</h7></div>
-					</div>
-					<p style="font-size: 14px;"><a href="https://markus-old.utsc.utoronto.ca/cscb20w19" target="_blank">Markus</a>,	<a href="files/content.pdf" target="_blank">A1 Solutions</a>, <a href="files/content.pdf" target="_blank">A2 Solutions</a></p>
-				</div>
-
-				<div id="resources" class="content-child">
-					<h2 style="text-align: center; color: white; padding-top: 10px;">Resources</h2>
-					<ul class="content-list">
-						<li class="content-list-item"><a href="https://piazza.com/class/k5l8ww7kz8l6f0" target="_blank">Piazza</a></li>
-						<li class="content-list-item"><a href="https://www.stackoverflow.com" target="_blank">Stack Overflow</a></li>
-						<li class="content-list-item"><a href="https://www.facebook.com/AMACSSUTSC/" target="_blank">AMACSS UTSC</a></li>
-						<li class="content-list-item"><a href="https://code.tutsplus.com/articles/sql-for-beginners--net-8200" target="_blank">MySQL Beginner Tutorial</a></li>
-					</ul>
-				</div>
-			</div>
+<h1 class="content-title" style="text-align: center;">Lecture Schedule</h1>
+<div id="lectures" class="content-child">
+	<h2 style="text-align: center; color: white;">Lectures</h2>
+	<!-- header div --->
+	<div id="table-row" style="font-weight: bold; color: white;">
+		<div class="table-content">
+			<h7>Week</h7>
+		</div>
+		<div class="table-content">
+			<h7>Topic</h7>
+		</div>
+		<div class="table-content">
+			<h7>Lab</h7>
 		</div>
 	</div>
-	<div id="footer">
-		<p><a href="https://www.utsc.utoronto.ca/cms/faculty-of-computer-science">Faculty of Computer Science at UTSC</a></p>
-		<p>Site Design by Ali Hasan and Youssef Iskander</p>
+
+	<div id="table-row">
+		<div class="table-content">
+			<h7>1</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Introduction to the Course</a></h7>
+		</div>
+		<div class="table-content">
+			<h7>-</h7>
+		</div>
 	</div>
 
+	<div id="table-row">
+		<div class="table-content">
+			<h7>2</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Diagrams and Relational Algebra</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 1</a></h7>
+		</div>
+	</div>
 
-</body>
-</html>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>3</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Diagrams and Relational Algebra</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 2</a></h7>
+		</div>
+	</div>
+
+	<div id="table-row">
+		<div class="table-content">
+			<h7>4</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">SQL and MySQL</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 3</a></h7>
+		</div>
+	</div>
+
+	<div id="table-row">
+		<div class="table-content">
+			<h7>5</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">SQL queries, creating and editing tables</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 4</a></h7>
+		</div>
+	</div>
+
+	<div id="table-row">
+		<div class="table-content">
+			<h7>6</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">MySQL Join Types, Views</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 5</a></h7>
+		</div>
+	</div>
+
+	<div id="table-row">
+		<div class="table-content">
+			<h7>7</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Intro to HTML, CSS</a></h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 6</a></h7>
+		</div>
+	</div>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>8</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Intro to PHP</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 7</a></h7>
+		</div>
+	</div>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>9</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">PHP and SQL</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 8</a></h7>
+		</div>
+	</div>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>10</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">JS, Query</a></h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 9</a></h7>
+		</div>
+	</div>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>11</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">jQuery, AJAX, JSON</a></h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 10</a></h7>
+		</div>
+	</div>
+	<div id="table-row">
+		<div class="table-content">
+			<h7>12</h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Past Final Exam</a> </h7>
+		</div>
+		<div class="table-content">
+			<h7><a href="files/content.pdf" target="_blank">Lab 11</a></h7>
+		</div>
+	</div>
+</div>
+
+<div id="other">
+	<div id="assignments" class="content-child">
+		<h2 style="text-align: center; color: white; padding-top: 10px;">Assignments</h2>
+		<div id="table-row" style="font-weight: bold; color: white;">
+			<div class="table-content"><h7>Assignment</h7></div>
+			<div class="table-content"><h7>Weight</h7></div>
+			<div class="table-content"><h7>Due Date</h7></div>
+		</div>
+		<div id="table-row">
+			<div class="table-content"><h7><a href="content.pdf">Assignment 1</a></h7></div>
+			<div class="table-content"><h7>10%</h7></div>
+			<div class="table-content"><h7>February 29</h7></div>
+		</div>
+		<div id="table-row">
+			<div class="table-content"><h7><a href="content.pdf">Assignment 2</a></h7></div>
+			<div class="table-content"><h7>15%</h7></div>
+			<div class="table-content"><h7>March 15</h7></div>
+		</div>
+		<div id="table-row">
+			<div class="table-content"><h7><a href="content.pdf">Assignment 3</a></h7></div>
+			<div class="table-content"><h7>15%</h7></div>
+			<div class="table-content"><h7>March 29</h7></div>
+		</div>
+		<p style="font-size: 14px;"><a href="https://markus-old.utsc.utoronto.ca/cscb20w19" target="_blank">Markus</a>,	<a href="files/content.pdf" target="_blank">A1 Solutions</a>, <a href="files/content.pdf" target="_blank">A2 Solutions</a></p>
+	</div>
+
+	<div id="resources" class="content-child">
+		<h2 style="text-align: center; color: white; padding-top: 10px;">Resources</h2>
+		<ul class="content-list">
+			<li class="content-list-item"><a href="https://piazza.com/class/k5l8ww7kz8l6f0" target="_blank">Piazza</a></li>
+			<li class="content-list-item"><a href="https://www.stackoverflow.com" target="_blank">Stack Overflow</a></li>
+			<li class="content-list-item"><a href="https://www.facebook.com/AMACSSUTSC/" target="_blank">AMACSS UTSC</a></li>
+			<li class="content-list-item"><a href="https://code.tutsplus.com/articles/sql-for-beginners--net-8200" target="_blank">MySQL Beginner Tutorial</a></li>
+		</ul>
+	</div>
+</div>
+{% endblock %}
