@@ -93,6 +93,10 @@ def logout():
         session.pop('instructor',None)
     return redirect('/')
 
+@app.route('/register')
+def signup():
+    return render_template('signup.html')
+
 @app.route('/calendar')
 def calendar():
     return render_template('schedule.html')
