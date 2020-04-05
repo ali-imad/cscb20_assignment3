@@ -117,6 +117,14 @@ def marks():
     student_info = session.get('student_info')
     is_student = session.get('student')
     all_students = session.get('all_students')
+    """
+    if request.form['explanation'] != None:
+        db = get_db()
+        cur = db.cursor()
+        cur.execute("INSERT INTO remarks VALUES (?, ?)", (request.form['remark'], request.form['explanation']))
+        cur.close()
+        db.close()
+    """    
     return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students)
 
 
