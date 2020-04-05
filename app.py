@@ -1,12 +1,14 @@
 import sqlite3, os, secrets, logging 
 
 from flask import Flask, flash, render_template, request, g, session, request, redirect, abort, url_for
+from flask.logging import create_logger
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+LOG = create_logger(app)
 
 
 # everything below this in the """""" i'm not using
@@ -65,7 +67,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
 @app.route('/')
 def root():
     # cookie check
-    app.logger.error(session.get('student'), session.get('instructor'))
     if not (session.get('student') or session.get('instructor')):
         return render_template('login.html')
     return render_template('index.html')
@@ -85,12 +86,12 @@ def login():
 def logout():
     # this is non functional, redirect breaks it
     if session.get('student'):
-        app.logger.warning("YEP YUR A STUDENT")
+        LOG.info("Goodbye, student")
         session.pop('student',None)
     elif session.get('instructor'):
-        app.logger.warning("YEP YUR A instructor")
+        LOG.info("Goodbye, instructor")
         session.pop('instructor',None)
-    redirect('/')
+    return redirect('/')
 
 @app.route('/calendar')
 def calendar():
