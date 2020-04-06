@@ -1,8 +1,20 @@
 import sqlite3, os, secrets, logging 
 
 from flask import Flask, flash, render_template, request, g, session, request, redirect, abort, url_for
+from wtforms import Form, StringField, PasswordField, validators
 from flask.logging import create_logger
 #from flask_sqlalchemy import SQLAlchemy
+
+#### CLASSES ####
+class RegisterForm(Form):
+    student_id = StringField('Username', [validators.Length(min=6, max=20, message='Student ID must be between 6 to 20 characters')])
+    student_name = StringField('Full Name', [validators.Length(min=4, max=80, message="Please enter your full name.")])
+    student_pw = PasswordField('Password', [
+        validators.Length(min=3, max=16, message='Password must be between 3 to 16 characters'),
+        validators.EqualTo('confirm_pw', message='Passwords must match')
+    ])
+    confirm_pw = PasswordField('Confirm Password', [validators.Length(min=3, max=16)])
+
 
 #db = SQLAlchemy()
 app = Flask(__name__)
@@ -52,7 +64,7 @@ def query_db(query, args=(), one=False):
 def root():
     # cookie check
     if not (session.get('student') or session.get('instructor')):
-        return render_template('login.html')
+        return redirect('/login')
     elif session.get('student') is True:
         student_info = session.get('student_info')
         return render_template('index.html', student_info = student_info, is_student=session.get('student'))
@@ -60,6 +72,10 @@ def root():
         instructor_info = session.get('intructor_info')
         all_students = session.get('all_students')
         return render_template('index.html', instructor_info=instructor_info, all_students=all_students, is_student=session.get('student'))
+
+@app.route('/login', methods=['GET', 'HEAD'])
+def not_logged_in():
+    return render_template('login.html')
 
 
 @app.route('/login', methods=['POST'])
@@ -108,10 +124,22 @@ def logout():
         session.pop('instructor',None)
     return redirect('/')
 
+@app.route('/register', methods=['GET', 'HEAD', 'POST'])
+def not_registered(): 
+    if session.get('student') or session.get('instructor'):
+        return redirect('/')
+    form = RegisterForm(request.form)
+    if request.method == 'POST' and form.validate():
+        db = get_db()
+        cur = db.cursor()
+        cur.execute("INSERT INTO verification VALUES (?, ?)", (form.student_id.data, form.student_pw.data))
+        cur.execute("INSERT INTO students VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (form.student_id.data, form.student_name.data, None, ))
+        cur.close()
+        db.close()
+        flash('Thanks for registering!')
+        return redirect('/')
 
-@app.route('/register')
-def signup():
-    return render_template('signup.html')
+    return render_template('signup.html', form=form)
 
 
 @app.route('/calendar')
@@ -129,6 +157,14 @@ def marks():
     student_info = session.get('student_info')
     is_student = session.get('student')
     all_students = session.get('all_students')
+    """
+    if request.form['explanation'] != None:
+        db = get_db()
+        cur = db.cursor()
+        cur.execute("INSERT INTO remarks VALUES (?, ?)", (request.form['remark'], request.form['explanation']))
+        cur.close()
+        db.close()
+    """    
     return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students)
 
 

@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>CSCB20 Home Page</title>
-	<meta name="viewport" content="width=device-width, initial-scale=0.7">
-	<link rel="stylesheet" type="text/css" href="static/css/index.css">
-	<link rel="stylesheet" type="text/css" href="static/css/form.css">
-</head>
-<body>
-<div id="login-container">
-    <div id="feedback-form">
-        <form method="POST" action="{{url_for('signup')}}">
-            <label for="user-login">ID</label>
-            <input type="text" id="visitor-category" placeholder="Enter Username" name="user-login" required>
+{% extends "signin_skeleton.html" %}
+{% block signin_form %}
 
-            <label for="pw-login">Password</label>
-            <input type="password" id="visitor-category" placeholder="Enter Password" name="pw-login" required>
+{% if form.errors %}
+    <ul class="errors">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
 
-            <input type="submit" value="Login">
-            <input type="submit" value="Clear">
-        </form>
+<div id="signin-content">
+    <form id="registration-form" method="POST" action="{{url_for('signup')}}">
+    <div id="login-box" class="signin-child">
+
     </div>
+    </form>
 </div>
-</body>
+{% endblock %}

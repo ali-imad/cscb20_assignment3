@@ -2,6 +2,7 @@
 #signin-content {
     display: flex;
     border-radius: 400px;
+    
     justify-content: center;
     align-items: center;
     width: 80%;
