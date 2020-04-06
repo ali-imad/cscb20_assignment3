@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="static/css/lectures.css">
+{% endblock %}
+
+{% block content %}
+<div class="content-child">
+    <div id="table-row">
+        <div class="table-content">
+            <h7>Student ID</h7>
+        </div>
+        <div class="table-content">
+            <h7>Name</h7>
+        </div>
+        <div class="table-content">
+            <h7>A1</h7>
+        </div>
+        <div class="table-content">
+            <h7>A2</h7>
+        </div>
+        <div class="table-content">
+            <h7>A3</h7>
+        </div>
+        <div class="table-content">
+            <h7>Labs</h7>
+        </div>
+        <div class="table-content">
+            <h7>Midterm</h7>
+        </div>
+        <div class="table-content">
+            <h7>Final</h7>
+        </div>
+    </div>
+    <!-- if student-->
+    {% if is_student == true %}
+    <div id="table-row">
+        <div class="table-content">
+            <h7> {{ student_info['SID']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Name']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A1']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A2']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A3']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Labs']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Midterm']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Final']}} </h7>
+        </div>
+    {% else %}
+    {% for student in all_students %}
+        <div id="table-row">
+            <div class="table-content">
+                <h7> {{ student['SID']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['Name']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['A1']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['A2']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['A3']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['Labs']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['Midterm']}} </h7>
+            </div>
+            <div class="table-content">
+                <h7> {{ student['Final']}} </h7>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
