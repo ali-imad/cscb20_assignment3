@@ -158,7 +158,7 @@
             <div class="content-child">
             {% if is_student == true %}
                 <h2 class="content-title">Submit a Remark Request Here</h2>
-                <form method="POST" action="/marks"></form>
+                <form method="POST" action="/marks" id="remark"></form>
                 <div id="feedback-form">
                     <label for="remark">What do you want remarked?</label>
                     <select id="visitor-category" name="remark">
@@ -170,7 +170,7 @@
                     </select>
             
                     <label for="comments">Explanation</label>
-                    <input type="text "id="comments" name="comments" placeholder="Why would you like a remark?" name="explanation" required>
+                    <input type="text "id="comments" name="explanation" placeholder="Why would you like a remark?" required>
                     <input type="submit" value="Submit">
                     <input type="submit" value="Clear">
                 </div>
