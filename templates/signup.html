@@ -12,10 +12,27 @@
 {% endif %}
 
 <div id="signin-content">
-    <form id="registration-form" method="POST" action="{{url_for('signup')}}">
-    <div id="login-box" class="signin-child">
-
-    </div>
+<h1 class="content-title" style="text-align:center"> Register Here!</h1>
+<div id="signup-box" class="signin-child">
+    <form id="registration-form" method="POST" action="{{url_for('register')}}">
+        <div class="form-field">
+            <h2 class="field-label">{{ form.student_id.label }}</h2>
+            {{ form.student_id(id="visitor-category", class="register-field") }}
+        </div>
+        <div class="form-field">
+            <h2 class="field-label">{{ form.student_pw.label }}</h2> 
+            {{ form.student_pw(id="visitor-category")}}
+        </div>
+        <div class="form-field">
+            <h2 class="field-label">{{ form.confirm_pw.label }}</h2>
+            {{ form.confirm_pw(id="visitor-category") }}
+        </div>
+        <div class="form-field">
+            <h2 class="field-label">{{ form.student_name.label }}</h2>
+            {{ form.student_name(id="visitor-category") }}</div>
+        <input type="submit" value="Register">
+        <input type="submit" value="Clear">
     </form>
+</div>
 </div>
 {% endblock %}

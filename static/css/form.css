@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Cabin:600&display=swap');
+.errors {
+    color: #c20051;
+    
+}
+
 #signin-content {
     display: flex;
+    flex-flow: column;
     border-radius: 400px;
-    
+    max-width: 50vw;
     justify-content: center;
     align-items: center;
     width: 80%;
@@ -37,8 +43,28 @@
     flex-flow: column wrap;
 }
 
+#signup-box {
+    color: #414141;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    min-width: 30%;
+}
+
+.field-label {
+    font-size: 0.8em;
+}
+
+.register-field {
+    min-width: 80%;
+}
+
 #login-form {
     flex: 5 60%;
+}
+
+#registration-form {
+    flex: 10 80%;
 }
 
 #feedback-form {

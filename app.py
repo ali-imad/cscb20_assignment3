@@ -7,7 +7,7 @@ from flask.logging import create_logger
 
 #### CLASSES ####
 class RegisterForm(Form):
-    student_id = StringField('Username', [validators.Length(min=6, max=20, message='Student ID must be between 6 to 20 characters')])
+    student_id = StringField('Student ID', [validators.Length(min=6, max=20, message='Student ID must be between 6 to 20 characters')])
     student_name = StringField('Full Name', [validators.Length(min=4, max=80, message="Please enter your full name.")])
     student_pw = PasswordField('Password', [
         validators.Length(min=3, max=16, message='Password must be between 3 to 16 characters'),
@@ -124,21 +124,30 @@ def logout():
         session.pop('instructor',None)
     return redirect('/')
 
-@app.route('/register', methods=['GET', 'HEAD', 'POST'])
+@app.route('/register', methods=['GET', 'HEAD'])
 def not_registered(): 
     if session.get('student') or session.get('instructor'):
         return redirect('/')
     form = RegisterForm(request.form)
+    LOG.info("Form established.")
+    return render_template('signup.html', form=form)
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    form = RegisterForm(request.form)
+    LOG.info("Form established.")
     if request.method == 'POST' and form.validate():
+        LOG.info("Valid form!")
         db = get_db()
+        LOG.info("db acquired")
         cur = db.cursor()
         cur.execute("INSERT INTO verification VALUES (?, ?)", (form.student_id.data, form.student_pw.data))
-        cur.execute("INSERT INTO students VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (form.student_id.data, form.student_name.data, None, ))
+        cur.execute("INSERT INTO students VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (form.student_id.data, form.student_name.data, None, None, None, None, None, None))
+        LOG.info("Executed cursor commands with values ({0}, {1}, {2})".format(form.student_id.data, form.student_pw.data, form.student_name.data))
         cur.close()
         db.close()
-        flash('Thanks for registering!')
         return redirect('/')
-
     return render_template('signup.html', form=form)
 
 
