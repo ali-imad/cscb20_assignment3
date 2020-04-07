@@ -98,23 +98,23 @@
 
                 <h3>What do you like about the instructor teaching?</h3>
                 {% for answer in answers %}
-                <h7>{{ answer['q1'] }}</h7>
+                <h7>- {{ answer['q1'] }} <br></h7>
                 {% endfor %}
 
                 <h3>What do you recommend the instructor to do to improve their teaching?</h3>
                 {% for answer in answers %}
-                <p>{{ answer['q2'] }}</p>
+                <h7>- {{ answer['q2'] }} <br></h7>
                 {% endfor %}
                 
 
                 <h3>What do you like about the labs?</h3>
                 {% for answer in answers %}
-                <p>{{ answer['q3'] }}</p>
+                <h7>- {{ answer['q3'] }} <br></h7>
                 {% endfor %}
 
                 <h3>What do you recommend the lab instructors to do to improve their lab teaching?</h3>
                 {% for answer in answers %}
-                <p>{{ answer['q4'] }}</p>
+                <h7>- {{ answer['q4'] }} <br></h7>
                 {% endfor %}
 
                 {% endif %}

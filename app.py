@@ -117,16 +117,16 @@ def marks():
     student_info = session.get('student_info')
     is_student = session.get('student')
     all_students = session.get('all_students')
-    """
-    if request.form['explanation'] != None:
-        db = get_db()
-        cur = db.cursor()
-        explanation = request.form['explanation']
-        cur.execute("INSERT INTO remarks VALUES (?, ?)", (None, explanation))
-        cur.close()
-        db.close()
-    """
-    return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students)
+
+    db = get_db()
+    db.row_factory = make_dicts
+
+    remarks = []
+    for remark in query_db('SELECT * FROM remarks'):
+        remarks.append(remark)
+
+
+    return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students, remarks=remarks)
 
 
 @app.route('/feedback')

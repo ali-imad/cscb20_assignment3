@@ -179,6 +179,12 @@
                 </form>
             {% else %}
                 <h2 class="content-title">Here are the remark requests submitted by students:</h2>
+
+                {% for remark in remarks %}
+                <h5>Remark request for {{ remark['remark']}} by {{ remark['SID']}} </h5>
+                <h7>Reason: {{ remark['explanation']}}</h7>
+                {% endfor %}
+
             {% endif %}
             </div>
         </div>
