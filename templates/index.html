@@ -76,8 +76,10 @@
 		<p><a href="static/files/content.pdf" class="content-link">Syllabus</a></p>
 		{% if is_studnet == true %}
 			<h4>Hello {{ student_info['Name'] }}, see your marks <a href="/marks">here</a></h4>
+			<h4>Submit feedback <a href="/feedback">here</a></h4>
 		{% else %}
 			<h4>Hello, see all your students' marks <a href="/marks">here</a></h4>
+			<h4>Hello, see feedback <a href="/feedback">here</a></h4>
 		{% endif %}
 	  </div>
 

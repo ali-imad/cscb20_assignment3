@@ -75,7 +75,7 @@ def login():
 
     for student in query_db('SELECT * FROM verification v, students s WHERE s.sid = username'):
         verify_student.append(student)
-    for instructor in query_db('SELECT * FROM verification v, instructors i WHERE v.username = i.pid'):
+    for instructor in query_db('SELECT * FROM verification v, instructors i WHERE v.username = i.PID'):
         verify_instructor.append(instructor)
     db.close()
 
@@ -121,11 +121,28 @@ def marks():
     if request.form['explanation'] != None:
         db = get_db()
         cur = db.cursor()
-        cur.execute("INSERT INTO remarks VALUES (?, ?)", (request.form['remark'], request.form['explanation']))
+        explanation = request.form['explanation']
+        cur.execute("INSERT INTO remarks VALUES (?, ?)", (None, explanation))
         cur.close()
         db.close()
-    """    
+    """
     return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students)
+
+
+@app.route('/feedback')
+def feedback():
+    is_student = session.get('student')
+    instructor = session.get('instructor_info')
+    db = get_db()
+    db.row_factory = make_dicts
+    PID = instructor['PID']
+    answers = []
+
+    for feedback in query_db("SELECT * FROM feedback WHERE PID = ?", (PID,)):
+        answers.append(feedback)
+
+    return render_template('feedback.html', is_student=is_student, answers=answers)
+
 
 
 @app.teardown_appcontext
