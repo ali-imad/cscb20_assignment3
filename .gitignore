@@ -17,3 +17,4 @@ env/*
 # other
 *.pdf
 db_test/
+test.py

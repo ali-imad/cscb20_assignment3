@@ -1,14 +1,19 @@
 {% extends "signin_skeleton.html" %}
+
 {% block signin_form %}
+
+
 <div id="signin-content">
     <form id="login-form" method="POST" action="{{url_for('login')}}">
     <div id="login-box" class="signin-child">
-        <label for="user-login">Username</label>
-        <input type="text" id="visitor-category" placeholder="Enter Username" name="user-login" required>
-
-        <label for="pw-login">Password</label>
-        <input type="password" id="visitor-category" placeholder="Enter Password" name="pw-login" required>
-
+        <div class="form-field">
+            <h2 class="field-label">{{ form.user_id.label }}</h2>
+            {{ form.user_id(id="visitor-category", placeholder="Enter ID") }}
+        </div>
+        <div class="form-field">
+            <h2 class="field-label">{{ form.user_pw.label }}</h2> 
+            {{ form.user_pw(id="visitor-category", placeholder="Enter Password")}}
+        </div>
         <input type="submit" value="Login">
         <input type="submit" value="Clear">
     </div>

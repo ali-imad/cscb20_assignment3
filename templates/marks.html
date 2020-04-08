@@ -60,7 +60,7 @@
             <h7> {{ student_info['Final']}} </h7>
         </div>
     {% else %}
-    {% for student in all_students %}
+    {% for key, student in all_students.items() %}
         <div id="table-row">
             <div class="table-content">
                 <h7> {{ student['SID']}} </h7>
@@ -85,11 +85,11 @@
             </div>
             <div class="table-content">
                 <h7> {{ student['Final']}} </h7>
+            </div>
         </div>
     {% endfor %}
     {% endif %}
     </div>
-</div>
 
 <div class="content-child">
 {% if is_student == true %}

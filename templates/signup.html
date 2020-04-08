@@ -1,16 +1,6 @@
 {% extends "signin_skeleton.html" %}
 {% block signin_form %}
 
-{% if form.errors %}
-    <ul class="errors">
-        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
-            {% for error in field_errors %}
-                <li>{{ form[field_name].label }}: {{ error }}</li>
-            {% endfor %}
-        {% endfor %}
-    </ul>
-{% endif %}
-
 <div id="signin-content">
 <h1 class="content-title" style="text-align:center"> Register Here!</h1>
 <div id="signup-box" class="signin-child">
@@ -29,7 +19,8 @@
         </div>
         <div class="form-field">
             <h2 class="field-label">{{ form.student_name.label }}</h2>
-            {{ form.student_name(id="visitor-category") }}</div>
+            {{ form.student_name(id="visitor-category") }}
+        </div>
         <input type="submit" value="Register">
         <input type="submit" value="Clear">
     </form>
