@@ -23,7 +23,7 @@ Verification = Base.classes.verification
 Remarks = Base.classes.remarks
 Students = Base.classes.students
 Instructors = Base.classes.instructors
-feedback = Base.classes.feedback
+Feedback = Base.classes.feedback
 
 
 LOG = create_logger(app)
@@ -186,6 +186,7 @@ def marks():
     is_instructor = session.get('instructor')
     all_students = {}
     student_info = {}
+    all_remarks = {}
 
     if is_instructor:
         # build the dictionary only if we are logged in as an instructor
@@ -201,6 +202,16 @@ def marks():
             'Final'   : student.Final,
             'Labs'    : student.Labs
                 }
+        
+        remark_list = db.session.query(Remarks).all()
+        for remark in remark_list:
+            all_remarks[remark.request_id] = {
+                'request_id': remark.request_id,
+                'remark' : remark.remark,
+                'explanation': remark.explanation,
+                'request_user': remark.request_user
+            }
+
 
     elif is_student:
         student = db.session.query(Students).get(session.get('ID'))
@@ -215,17 +226,28 @@ def marks():
         'Labs'    : student.Labs
             }
 
-    """
-    if request.form['explanation'] != None:
-        db = get_db()
-        cur = db.cursor()
-        cur.execute("INSERT INTO remarks VALUES (?, ?)", (request.form['remark'], request.form['explanation']))
-        cur.close()
-        db.close()
-    """    
+    
 
-    return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students)
+    return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students, all_remarks=all_remarks)
 
+@app.route('/feedback')
+def feedback():
+    is_student = session.get('student')
+    all_feedback = {}
+    if is_student is not True:
+        feedback_list = db.session.query(Feedback).all()
+        for feedback in feedback_list:
+            if feedback.PID == session.get('ID'):
+                all_feedback[feedback.feedback_id] = {
+                    'feedback_id'   : feedback.feedback_id,
+                    'q1'            : feedback.q1,
+                    'q2'            : feedback.q2,
+                    'q3'            : feedback.q3,
+                    'q4'            : feedback.q4,
+                }
+
+
+    return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback)
 
 """
 @app.teardown_appcontext

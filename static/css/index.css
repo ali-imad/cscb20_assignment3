@@ -138,7 +138,7 @@ body {
     margin: 20px;
     background-color: #2660A4;
     min-height: 100px;
-    box-shadow: 0 0 14px rgba(66, 66, 66, 0.603)
+    box-shadow: 0 0 14px rgba(66, 66, 66, 0.603);
 }
 
 .content-link {
@@ -231,6 +231,7 @@ a.cat_link {
 #schedule img{
     width: 100%;
 }
+
 
 @media (max-width: 1212px) {  /* i was going to do 1200 but 1212 is where the index title begins wrapping */
     #content {

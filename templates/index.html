@@ -10,6 +10,11 @@
 	static and interactive documents; Web servers and dynamic server-generated content; Web application development and
 	interface with databases.</p>
 	<p><a href="static/files/content.pdf" class="content-link">Syllabus</a></p>
+	{% if is_student is true %}
+	<p>Submit anonymous feedback <a href="/feedback">here</a></p>
+	{% else %}
+	<p>Review annonymous feedback <a href="/feedback"> here</a></p>
+	{% endif %}
 </div>
 
 <div class="content-child">
