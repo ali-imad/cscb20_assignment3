@@ -2,47 +2,35 @@
 
 {% block content %}
 <div class="content-child">
-    {% if is_student is true %}
+    {% if is_student %}
+    <h2 class="content-title">Provide your instructors feedback!</h2>
+    <form method="POST" action="{{ url_for('feedback') }}">
     <div id="feedback-form">
-        <label for="instructor">ID of the instructor you are evaluating</label>
-        <input type="text" name="instructor" id="comments">
-
-        <label for="q1">What do you like about the instructor teaching?</label>
-        <input type="text" name="q1" id="comments">
-
-        <label for="q1">What do you recommend the instructor to do to improve their teaching?</label>
-        <input type="text" name="q2" id="comments">
-
-        <label for="q1">What do you like about the instructor's assignments and testing material?</label>
-        <input type="text" name="q3" id="comments">
-
-        <label for="q1">Do you believe you are being properly evaluated on your knowledge in this course?</label>
-        <input type="text" name="q4" id="comments">
-
+        <div class="form-field">
+            <h3 class="field-label">{{ form.instructor.label }}</h3>
+            {{ form.instructor(id="visitor-category")}}
+        </div>
+        <div class="form-field">
+            <h3 class="field-label">{{ form.q1.label }}</h3>
+            {{ form.q1(id="visitor-category")}}
+        </div>
+        <div class="form-field">
+            <h3 class="field-label">{{ form.q2.label }}</h3>
+            {{ form.q2(id="visitor-category")}}
+        </div>
+        <div class="form-field">
+            <h3 class="field-label">{{ form.q2.label }}</h3>
+            {{ form.q3(id="visitor-category")}}
+        </div>
+        <div class="form-field">
+            <h3 class="field-label">{{ form.q4.label }}</h3>
+            {{ form.q4(id="visitor-category")}}
+        </div>
         <input type="submit" value="Submit">
-        <input type="submit" value="Clear">
     </div>
+    </form>
     {% else %}
-    <h2 class="content-title">Here is the feedback submitted by students</h2>
 
-    {% for key, feedback in all_feedback.items() %}
-    <div class="box">
-        <h7 class="content-title"><br>What do you like about the instructor teaching?<br></h7>
-        <h7>{{ feedback['q1'] }} <br></h7>
-
-        <h7 class="content-title"><br>What do you recommend the instructor to do to improve their teaching?<br></h7>
-        <h7>{{ feedback['q2'] }} <br></h7>
-
-        <h7 class="content-title"><br>What do you like about the instructor's assignments and testing material?<br></h7>
-        <h7>{{ feedback['q3'] }} <br></h7><br>
-
-        <h7 class="content-title">Do you believe you are being properly evaluated on your knowledge in this course?<br></h7>
-        <h7>{{ feedback['q4'] }} <br></h7>
-        <br>
-        <br>
-        <br>
-    </div>
-    {% endfor %}
     {% endif %}
 
 </div>

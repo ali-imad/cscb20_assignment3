@@ -1,7 +1,7 @@
 import sqlite3, os, secrets, logging
 
 from flask import Flask, flash, render_template, request, g, session, request, redirect, abort, url_for
-from wtforms import Form, StringField, PasswordField, validators, SelectField, DecimalField
+from wtforms import Form, StringField, PasswordField, TextAreaField, validators, SelectField, DecimalField
 from flask.logging import create_logger
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
@@ -55,6 +55,15 @@ class UpdateGradeForm(Form):
                                                     ])
 
     new_grade = DecimalField('New grade', [validators.DataRequired(message="Please enter a value"), validators.NumberRange(min=0, message="Please enter a value greater than 0.")], places=2)
+
+
+class FeedbackForm(Form):
+    q1 = TextAreaField(u"What do you like about the instructor teaching?")
+    q2 = TextAreaField(u"What do you recommend the instructor to do to improve their teaching?")
+    q3 = TextAreaField(u"What do you like about the instructor's assignments and testing material?")
+    q4 = TextAreaField(u"Do you believe you are being properly evaluated on your knowledge in this course?")
+    instructor = SelectField("Instructor of interest", choices=[])
+
 
 # everything below this in the """""" i'm not using
 """
@@ -172,7 +181,15 @@ def register():
     LOG.info("Form established.")
     if form.validate():
         new_user_verify = Verification(username=form.student_id.data, password=form.student_pw.data)
-        new_user_grades = Students(SID=form.student_id.data,Name=form.student_name.data,A1=None,A2=None,A3=None,Midterm=None,Final=None,Labs=None)
+        new_user_grades = Students(SID=form.student_id.data,
+                                    Name=form.student_name.data,
+                                    A1=None,
+                                    A2=None,
+                                    A3=None,
+                                    Midterm=None,
+                                    Final=None,
+                                    Labs=None
+                                    )
         db.session.add(new_user_grades)
         db.session.add(new_user_verify)
         db.session.commit()
@@ -246,25 +263,28 @@ def edit_marks(student_id):
     
 
 
-@app.route('/feedback')
+@app.route('/feedback', methods=['GET', 'HEAD', 'POST'])
 def feedback():
     is_student = session.get('student')
     all_feedback = {}
-    if is_student is not True:
+    form = FeedbackForm(request.form)
+    # build the instructor choices from the names of all active instructors
+    # their id's are the values
+    form.instructor.choices = [(instruct.PID, instruct.Name) for instruct in db.session.query(Instructors).all()]
+    if not is_student:
         feedback_list = db.session.query(Feedback).all()
         for feedback in feedback_list:
             if feedback.PID == session.get('ID'):
                 all_feedback[feedback.feedback_id] = feedback.__dict__
 
-    return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback)
-
-"""
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-"""
+    if request.method == 'POST' and form.validate():
+        new_feedback = Feedback(PID=form.instructor.data, q1=form.q1.data, q2=form.q1.data, q3=form.q1.data, q4=form.q1.data)
+        db.session.add(new_feedback)
+        db.session.commit()
+        flash("Thanks for the feedback!")
+        redirect(url_for('root'))
+    
+    return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback, form=form)
 
 
 if __name__ == '__main__':
