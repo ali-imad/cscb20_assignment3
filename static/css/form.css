@@ -83,9 +83,7 @@ label {
     margin-top: 6px;
 }
 
-input[type=submit] {
-    color: #ffffff;
-    background-color: #3700ff31;
+#form-button {
     cursor: pointer;
     padding: 12px 20px;
     font-size: x-large;
@@ -94,12 +92,18 @@ input[type=submit] {
     margin-top: 8px;
 }
 
+input[type=submit] {
+    background-color: #3700ff31;
+    color: #FFF;
+}
+
 input[type=submit]:hover {
     background-color: rgb(43, 69, 216);
 }
 
 input[value=Clear] {
     background-color: rgba(255, 127, 80, 0.555);
+    color: #FFF;
 }
 
 input[value=Clear]:hover {

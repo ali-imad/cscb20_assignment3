@@ -14,10 +14,13 @@
             <h2 class="field-label">{{ form.user_pw.label }}</h2> 
             {{ form.user_pw(id="visitor-category", placeholder="Enter Password")}}
         </div>
-        <input type="submit" value="Login">
-        <input type="submit" value="Clear">
+        <input id="form-button" type="submit" value="Login">
+        <input id="form-button" type="button" onclick="clear_form('login-form')" value="Clear">
     </div>
     </form>
+
+    <script src="{{ url_for('static', filename='scripts/clear.js') }}"></script>
+
     <div id="register-box" class="signin-child">
         <h2 class="register-title">Don't have an account?</h2>
         <h3><a href="{{url_for('not_registered')}}">Register here</a></h3>

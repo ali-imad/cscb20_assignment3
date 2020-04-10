@@ -21,8 +21,8 @@
             <h2 class="field-label">{{ form.student_name.label }}</h2>
             {{ form.student_name(id="visitor-category") }}
         </div>
-        <input type="submit" value="Register">
-        <input type="button" onclick="clear_form('registration-form')" value="Clear">
+        <input id="form-button" type="submit" value="Register">
+        <input id="form-button" type="button" onclick="clear_form('registration-form')" value="Clear">
 
     </form>
     <script src="{{ url_for('static', filename='scripts/clear.js') }}"></script>
