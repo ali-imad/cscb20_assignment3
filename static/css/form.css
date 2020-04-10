@@ -15,7 +15,7 @@
     height: 50%;
     align-self: center;
     padding: 4vw 10vh;
-    background-image: url('img/escheresque-dark.png');
+    background-image: url('/static/img/escheresque-dark.png');
 }
 
 #register-box {

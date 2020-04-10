@@ -54,7 +54,7 @@ body {
     margin-left:  4%;
     margin-right: 4%;
     background-color: rgb(247, 244, 247);
-    background-image: url('img/seigaiha.png');
+    background-image: url('/static/img/seigaiha.png');
     background-repeat: repeat;
     height: 100vh;
 }
