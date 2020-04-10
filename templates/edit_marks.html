@@ -57,4 +57,35 @@
         <div class="table-content">
             <h7> {{ student_info['Final']}} </h7>
         </div>
+    </div>
+</div>
+</div>
+
+    <div class="content-child">
+
+        {% if form.errors %}
+            <ul class="errors">
+                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                    {% for error in field_errors %}
+                        <li>{{ form[field_name].label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h2 class="content-title">Remark this students assignments</h2>
+        <form method="POST" action="{{ url_for('edit_marks', student_id=student_info['SID']) }}">
+        <div id="feedback-form">
+            <div class="form-field">
+                <h2 class="field-label">{{ form.assignment.label }}</h2>
+                {{ form.assignment(id="visitor-category") }}
+            </div>
+            <div class="form-field">
+                <h2 class="field-label">{{ form.new_grade.label }}</h2> 
+                {{ form.new_grade(id="visitor-category", size=6) }}
+            </div>
+            <input type="submit" value="Change">
+        </div>
+    </form>
+    </div>
 {% endblock %}

@@ -54,7 +54,7 @@ class UpdateGradeForm(Form):
                                                     ('Labs', 'Labs')
                                                     ])
 
-    new_grade = DecimalField('New grade', places=2)
+    new_grade = DecimalField('New grade', [validators.DataRequired(message="Please enter a value"), validators.NumberRange(min=0, message="Please enter a value greater than 0.")], places=2)
 
 # everything below this in the """""" i'm not using
 """
@@ -203,17 +203,8 @@ def marks():
         # build the dictionary only if we are logged in as an instructor
         student_list = db.session.query(Students).all()
         for student in student_list:
-            all_students[student.SID] = {
-            'SID'     : student.SID,
-            'Name'    : student.Name,
-            'A1'      : student.A1,
-            'A2'      : student.A2,
-            'A3'      : student.A2,
-            'Midterm' : student.Midterm,
-            'Final'   : student.Final,
-            'Labs'    : student.Labs
-                }
-        
+            all_students[student.SID] = student.__dict__
+
         remark_list = db.session.query(Remarks).all()
         for remark in remark_list:
             all_remarks[remark.request_id] = {
@@ -226,22 +217,12 @@ def marks():
 
     elif is_student:
         student = db.session.query(Students).get(session.get('ID'))
-        student_info = {
-        'SID'     : student.SID,
-        'Name'    : student.Name,
-        'A1'      : student.A1,
-        'A2'      : student.A2,
-        'A3'      : student.A2,
-        'Midterm' : student.Midterm,
-        'Final'   : student.Final,
-        'Labs'    : student.Labs
-            }
-
+        student_info = student.__dict__
 
     return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students, all_remarks=all_remarks)
 
 
-@app.route('/marks/<student_id>')
+@app.route('/marks/<student_id>', methods=['GET', 'HEAD', 'POST'])
 def edit_marks(student_id):
     if not session.get('instructor'):
         return redirect('/marks')
@@ -251,20 +232,17 @@ def edit_marks(student_id):
     
     student = db.session.query(Students).get(student_id)
     if student is None:
-        flash('That was not a valid student ID!')
+        flash('{0} was not a valid student ID!'.format(student_id))
         return redirect('/marks')
-    student_info = {
-    'SID'     : student.SID,
-    'Name'    : student.Name,
-    'A1'      : student.A1,
-    'A2'      : student.A2,
-    'A3'      : student.A2,
-    'Midterm' : student.Midterm,
-    'Final'   : student.Final,
-    'Labs'    : student.Labs
-        }
+    student_info = student.__dict__
+    form = UpdateGradeForm(request.form)
+    if request.method == 'POST' and form.validate():
+        setattr(student, form.assignment.data, float(form.new_grade.data))
+        db.session.commit()
+        flash("Marks updated!")
+        return redirect('/marks')
     
-    return render_template('edit_marks.html', student_info=student_info)
+    return render_template('edit_marks.html', student_info=student_info, form=form)
     
 
 
@@ -276,14 +254,7 @@ def feedback():
         feedback_list = db.session.query(Feedback).all()
         for feedback in feedback_list:
             if feedback.PID == session.get('ID'):
-                all_feedback[feedback.feedback_id] = {
-                    'feedback_id'   : feedback.feedback_id,
-                    'q1'            : feedback.q1,
-                    'q2'            : feedback.q2,
-                    'q3'            : feedback.q3,
-                    'q4'            : feedback.q4,
-                }
-
+                all_feedback[feedback.feedback_id] = feedback.__dict__
 
     return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback)
 
