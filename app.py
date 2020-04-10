@@ -282,7 +282,7 @@ def feedback():
         db.session.add(new_feedback)
         db.session.commit()
         flash("Thanks for the feedback!")
-        redirect(url_for('root'))
+        return redirect(url_for('root'))
     
     return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback, form=form)
 

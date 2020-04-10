@@ -1,8 +1,8 @@
 {% extends "base.html"%}
 
 {% block content %}
+{% if is_student %}
 <div class="content-child">
-    {% if is_student %}
     <h2 class="content-title">Provide your instructors feedback!</h2>
     <form method="POST" action="{{ url_for('feedback') }}">
     <div id="feedback-form">
@@ -29,9 +29,26 @@
         <input type="submit" value="Submit">
     </div>
     </form>
-    {% else %}
+</div>
+{% else %}
+<h1 class="content-title" style="text-align: center;">Here is the feedback submitted by students</h1>
 
-    {% endif %}
+{% for key, feedback in all_feedback.items() %}
+<div class="content-child">
+    <h7 class="content-title"><br>What do you like about the instructor teaching?<br></h7>
+    <h7>{{ feedback['q1'] }} <br></h7>
+
+    <h7 class="content-title"><br>What do you recommend the instructor to do to improve their teaching?<br></h7>
+    <h7>{{ feedback['q2'] }} <br></h7>
+
+    <h7 class="content-title"><br>What do you like about the instructor's assignments and testing material?<br></h7>
+    <h7>{{ feedback['q3'] }} <br></h7><br>
+
+    <h7 class="content-title">Do you believe you are being properly evaluated on your knowledge in this course?<br></h7>
+    <h7>{{ feedback['q4'] }} <br></h7>
+</div>
+{% endfor %}
+{% endif %}
 
 </div>
 {% endblock %}
