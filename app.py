@@ -246,7 +246,7 @@ def edit_marks(student_id):
     session['canMark'] = bool(db.session.query(Instructors).get(session.get('ID')).canMark)
     if not session.get('canMark'):
         return redirect('/marks')
-    
+
     student = db.session.query(Students).get(student_id)
     if student is None:
         flash('{0} was not a valid student ID!'.format(student_id))
@@ -258,9 +258,8 @@ def edit_marks(student_id):
         db.session.commit()
         flash("Marks updated!")
         return redirect('/marks')
-    
+
     return render_template('edit_marks.html', student_info=student_info, form=form)
-    
 
 
 @app.route('/feedback', methods=['GET', 'HEAD', 'POST'])
@@ -283,7 +282,7 @@ def feedback():
         db.session.commit()
         flash("Thanks for the feedback!")
         return redirect(url_for('root'))
-    
+ 
     return render_template("feedback.html", is_student=is_student, all_feedback=all_feedback, form=form)
 
 
