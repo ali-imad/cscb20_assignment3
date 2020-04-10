@@ -10,9 +10,6 @@ from sqlalchemy.ext.automap import automap_base
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
-# favicon
-app.add_url_rule('/favicon.ico', redirect_to=url_for('static', filename='favicon.ico'))
-
 # database initializations
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
 db = SQLAlchemy(app)
