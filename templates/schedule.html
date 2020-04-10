@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
-<link rel="stylesheet" type="text/css" href="static/css/schedule.css">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/schedule.css') }}">
 {% endblock %}
 
 {% block content %}

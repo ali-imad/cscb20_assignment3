@@ -9,7 +9,7 @@
 	querying and updating databases; the entity-relationship model for database design. Web documents and applications:
 	static and interactive documents; Web servers and dynamic server-generated content; Web application development and
 	interface with databases.</p>
-	<p><a href="static/files/content.pdf" class="content-link">Syllabus</a></p>
+	<p><a href="{{ url_for('static', filename='files/content.pdf') }}" class="content-link">Syllabus</a></p>
 	{% if is_student is true %}
 	<p>Submit anonymous feedback <a href="/feedback">here</a></p>
 	{% else %}

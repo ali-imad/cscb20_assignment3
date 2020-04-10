@@ -1,7 +1,7 @@
 import sqlite3, os, secrets, logging
 
 from flask import Flask, flash, render_template, request, g, session, request, redirect, abort, url_for
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators, SelectField, DecimalField
 from flask.logging import create_logger
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
@@ -44,6 +44,17 @@ class LoginForm(Form):
     user_id = StringField('User ID', [validators.DataRequired(message="Please fill in the user ID field.")])
     user_pw = PasswordField('User Password', [validators.DataRequired(message="Please fill in the password field.")])
 
+
+class UpdateGradeForm(Form):
+    assignment = SelectField('Assignment', choices=[('A1', 'Assignment 1'),
+                                                    ('A2', 'Assignment 2'),
+                                                    ('A3', 'Assignment 3'),
+                                                    ('Midterm', 'Midterm'),
+                                                    ('Final', 'Final'),
+                                                    ('Labs', 'Labs')
+                                                    ])
+
+    new_grade = DecimalField('New grade', places=2)
 
 # everything below this in the """""" i'm not using
 """
@@ -226,9 +237,36 @@ def marks():
         'Labs'    : student.Labs
             }
 
-    
 
     return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students, all_remarks=all_remarks)
+
+
+@app.route('/marks/<student_id>')
+def edit_marks(student_id):
+    if not session.get('instructor'):
+        return redirect('/marks')
+    session['canMark'] = bool(db.session.query(Instructors).get(session.get('ID')).canMark)
+    if not session.get('canMark'):
+        return redirect('/marks')
+    
+    student = db.session.query(Students).get(student_id)
+    if student is None:
+        flash('That was not a valid student ID!')
+        return redirect('/marks')
+    student_info = {
+    'SID'     : student.SID,
+    'Name'    : student.Name,
+    'A1'      : student.A1,
+    'A2'      : student.A2,
+    'A3'      : student.A2,
+    'Midterm' : student.Midterm,
+    'Final'   : student.Final,
+    'Labs'    : student.Labs
+        }
+    
+    return render_template('edit_marks.html', student_info=student_info)
+    
+
 
 @app.route('/feedback')
 def feedback():

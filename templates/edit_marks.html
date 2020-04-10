@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/lectures.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content-child">
+    <div id="table-row">
+        <div class="table-content">
+            <h7>Student ID</h7>
+        </div>
+        <div class="table-content">
+            <h7>Name</h7>
+        </div>
+        <div class="table-content">
+            <h7>A1</h7>
+        </div>
+        <div class="table-content">
+            <h7>A2</h7>
+        </div>
+        <div class="table-content">
+            <h7>A3</h7>
+        </div>
+        <div class="table-content">
+            <h7>Labs</h7>
+        </div>
+        <div class="table-content">
+            <h7>Midterm</h7>
+        </div>
+        <div class="table-content">
+            <h7>Final</h7>
+        </div>
+    </div>
+    <div id="table-row">
+        <div class="table-content">
+            <h7> {{ student_info['SID']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Name']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A1']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A2']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['A3']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Labs']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Midterm']}} </h7>
+        </div>
+        <div class="table-content">
+            <h7> {{ student_info['Final']}} </h7>
+        </div>
+{% endblock %}
