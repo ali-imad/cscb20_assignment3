@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 
 # database initializations
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///login.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 db = SQLAlchemy(app)
 
 # grabbing tables
@@ -183,16 +183,25 @@ def register():
 
 @app.route('/calendar')
 def calendar():
+    if not (session.get('student') or session.get('instructor')):
+        flash("Please enter your username and password before accessing this.")
+        return redirect('/login')
     return render_template('schedule.html')
 
 
 @app.route('/class-resources')
 def class_resources():
+    if not (session.get('student') or session.get('instructor')):
+        flash("Please enter your username and password before accessing this.")
+        return redirect('/login')
     return render_template('lectures.html')
 
 
 @app.route('/marks', methods=['GET', 'HEAD', 'POST'])
 def marks():
+    if not (session.get('student') or session.get('instructor')):
+        flash("Please enter your username and password before accessing this.")
+        return redirect('/login')
     # jinja specific bools
     is_student = session.get('student')
     is_instructor = session.get('instructor')
@@ -256,6 +265,9 @@ def edit_marks(student_id):
 
 @app.route('/feedback', methods=['GET', 'HEAD', 'POST'])
 def feedback():
+    if not (session.get('student') or session.get('instructor')):
+        flash("Please enter your username and password before accessing this.")
+        return redirect('/login')
     is_student = session.get('student')
     all_feedback = {}
     form = FeedbackForm(request.form)
