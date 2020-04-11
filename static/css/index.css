@@ -248,6 +248,9 @@ a.cat_link {
     background-color: rgba(54, 54, 52);
 }
 
+.remark-requests {
+    overflow: auto;
+}
 
 @media (max-width: 1212px) {  /* i was going to do 1200 but 1212 is where the index title begins wrapping */
     #content {
