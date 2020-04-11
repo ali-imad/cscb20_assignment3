@@ -36,6 +36,11 @@
     padding: 0 13px;
 }
 
+.first-row {
+    font-weight: bold;
+    color: white;
+}
+
 .col-title h7 {
     font-size: 18px;
 }
