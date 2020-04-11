@@ -18,7 +18,7 @@
 	{% if messages %}
 		<ul class='flashes'>
 		{% for message in messages %}
-		<li>{{ message }}<a href="#" onclick="delete_parent()"><img id="delete-button"  src="{{ url_for('static', filename='img/delete.png') }}"></a></li>
+		<li>{{ message }}</li>
 		{% endfor %}
 		</ul>
 	{% endif %}
