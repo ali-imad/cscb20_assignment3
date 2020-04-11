@@ -97,22 +97,21 @@
 {% if is_student == true %}
     <h2 class="content-title">Submit a Remark Request Here</h2>
     <form id="feedback-form" method="POST" action="/marks">
-    <label for="remark">What do you want remarked?</label>
-    <select id="visitor-category" name="remark">
-        <option value="a1">Assignment 1</option>
-        <option value="a2">Assignment 2</option>
-        <option value="a3">Assignment 3</option>
-        <option value="midterm">Midterm</option>
-        <option value="other">Other</option>
-    </select>
-    <label for="comments">Explanation</label>
-    <input type="text "id="comments" name="comments" placeholder="Why would you like a remark?" name="explanation" required>
-    <input id="form-button" type="submit" value="Submit">
-    <input id="form-button" type="button" onclick="clear_form('feedback-form')" value="Clear">
+        <div class="form-field">
+            <h2 class="field-label">{{ form.assignment.label }}</h2>
+            {{ form.assignment(id="visitor-category") }}
+        </div>
+        <div class="form-field">
+            <h2 class="field-label">{{ form.explanation.label }}</h2> 
+            {{ form.explanation(id="visitor-category") }}
+        </div>
+        <input id="form-button" type="submit" value="Submit">
+        <input id="form-button" type="button" onclick="clear_form('feedback-form')" value="Clear">
     </form>
     <script src="{{ url_for('static', filename='scripts/clear.js') }}"></script>
 {% else %}
     <h2 class="content-title">Here are the remark requests submitted by students:</h2>
+    <br>
     {% for key, remark in all_remarks.items() %}
     <div class="student-request">
         <h7 class="content-title">Remark Request for {{ remark['remark'] }} by {{ remark['request_user'] }} <br></h7>

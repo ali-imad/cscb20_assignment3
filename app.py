@@ -57,6 +57,18 @@ class UpdateGradeForm(Form):
     new_grade = DecimalField('New grade', [validators.DataRequired(message="Please enter a value"), validators.NumberRange(min=0, message="Please enter a value greater than 0.")], places=2)
 
 
+class RemarkForm(Form):
+    assignment = SelectField('What do you want remarked?', choices=[('A1', 'Assignment 1'),
+                                                                    ('A2', 'Assignment 2'),
+                                                                    ('A3', 'Assignment 3'),
+                                                                    ('Midterm', 'Midterm'),
+                                                                    ('Final', 'Final'),
+                                                                    ('Labs', 'Labs')
+                                                                    ])
+
+    explanation = TextAreaField("Explanation")
+
+
 class FeedbackForm(Form):
     q1 = TextAreaField(u"What do you like about the instructor teaching?")
     q2 = TextAreaField(u"What do you recommend the instructor to do to improve their teaching?")
@@ -89,7 +101,6 @@ def root():
 def not_logged_in():
     if session.get('student') or session.get('instructor'):
         return redirect('/')
-    flash("Please enter your username and password before accessing this.")
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
 
@@ -134,6 +145,7 @@ def logout():
     elif session.get('instructor'):
         LOG.info("Goodbye, instructor")
         session.pop('instructor',None)
+    session.pop('ID',None)
     return redirect('/')
 
 @app.route('/register', methods=['GET', 'HEAD'])
@@ -141,14 +153,12 @@ def not_registered():
     if session.get('student') or session.get('instructor'):
         return redirect('/')
     form = RegisterForm(request.form)
-    LOG.info("Form established.")
     return render_template('signup.html', form=form)
 
 
 @app.route('/register', methods=['POST'])
 def register():
     form = RegisterForm(request.form)
-    LOG.info("Form established.")
     if form.validate():
         existing_user = db.session.query(Students).get(form.student_id.data)
         if existing_user is not None:
@@ -181,7 +191,7 @@ def class_resources():
     return render_template('lectures.html')
 
 
-@app.route('/marks')
+@app.route('/marks', methods=['GET', 'HEAD', 'POST'])
 def marks():
     # jinja specific bools
     is_student = session.get('student')
@@ -189,6 +199,7 @@ def marks():
     all_students = {}
     student_info = {}
     all_remarks = {}
+    form = RemarkForm(request.form)
 
     if is_instructor:
         # build the dictionary only if we are logged in as an instructor
@@ -205,12 +216,19 @@ def marks():
                 'request_user': remark.request_user
             }
 
-
     elif is_student:
         student = db.session.query(Students).get(session.get('ID'))
         student_info = student.__dict__
+        if request.method == 'POST':
+            remark_request = Remarks(remark=form.assignment.data,
+                                     explanation=form.explanation.data,
+                                     request_user=session.get('ID'))
+            db.session.add(remark_request)
+            db.session.commit()
+            flash("Thanks for the request!")
+            return redirect('/')
 
-    return render_template('marks.html', student_info=student_info, is_student=is_student, all_students=all_students, all_remarks=all_remarks)
+    return render_template('marks.html', form=form, student_info=student_info, is_student=is_student, all_students=all_students, all_remarks=all_remarks)
 
 
 @app.route('/marks/<student_id>', methods=['GET', 'HEAD', 'POST'])
