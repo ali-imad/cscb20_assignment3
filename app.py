@@ -65,38 +65,6 @@ class FeedbackForm(Form):
     instructor = SelectField("Instructor of interest", choices=[])
 
 
-# everything below this in the """""" i'm not using
-"""
-DATABASE = './login.db'
-
-# from flask documentatio at 
-# https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/?highlight=sqlite
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-    return db
-
-# from flask documentatio at
-# https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/?highlight=sqlite
-def make_dicts(cursor, row):
-    return dict((cursor.description[idx][0], value)
-                for idx, value in enumerate(row))
-
-# from flask documentatio at
-# https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/?highlight=sqlite
-def query_db(query, args=(), one=False):
-    cur = get_db().execute(query, args)
-    rv = cur.fetchall()
-    cur.close()
-    return (rv[0] if rv else None) if one else rv
-
-
-# from flask documentatio at
-# https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/?highlight=sqlite
-
-"""
-
 ##### authentication #####
 # partly inspired by tutorial at
 # https://pythonspot.com/login-authentication-with-flask/ 
@@ -107,6 +75,7 @@ def query_db(query, args=(), one=False):
 def root():
     # cookie check
     if not (session.get('student') or session.get('instructor')):
+        flash("Please enter your username and password before accessing this.")
         return redirect('/login')
     elif session.get('student') is True:
         student_info = session.get('student_info')
@@ -120,6 +89,7 @@ def root():
 def not_logged_in():
     if session.get('student') or session.get('instructor'):
         return redirect('/')
+    flash("Please enter your username and password before accessing this.")
     form = LoginForm(request.form)
     return render_template('login.html', form=form)
 

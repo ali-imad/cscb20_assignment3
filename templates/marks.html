@@ -114,10 +114,11 @@
 {% else %}
     <h2 class="content-title">Here are the remark requests submitted by students:</h2>
     {% for key, remark in all_remarks.items() %}
-    <h7 class="content-title">Remark Request for {{ remark['remark'] }} by {{ remark['request_user'] }} <br></h7>
-    <h7>Reason: {{ remark['explanation'] }} <br></h7>
-    <h7>Request ID: {{ remark['request_id'] }} <br></h7>
-    <br>
+    <div class="student-request">
+        <h7 class="content-title">Remark Request for {{ remark['remark'] }} by {{ remark['request_user'] }} <br></h7>
+        <h7>Reason: {{ remark['explanation'] }} <br></h7>
+        <h7>Request ID: {{ remark['request_id'] }} <br></h7>
+    </div>
     {% endfor %}
 {% endif %}
 </div>
