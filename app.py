@@ -150,6 +150,10 @@ def register():
     form = RegisterForm(request.form)
     LOG.info("Form established.")
     if form.validate():
+        existing_user = db.session.query(Students).get(form.student_id.data)
+        if existing_user is not None:
+            flash("A user with this student ID already exists")
+            return redirect('/register')
         new_user_verify = Verification(username=form.student_id.data, password=form.student_pw.data)
         new_user_grades = Students(SID=form.student_id.data,
                                     Name=form.student_name.data,
