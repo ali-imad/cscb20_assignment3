@@ -6,29 +6,30 @@
 
 {% block content %}
 <div class="content-child">
-    <div id="table-row">
-        <div class="table-content">
+    <h1 class="content-title centered">Grades</h1>
+    <div id="table-row" class="head">
+        <div class="table-content col-title">
             <h7>Student ID</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>Name</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>A1</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>A2</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>A3</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>Labs</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>Midterm</h7>
         </div>
-        <div class="table-content">
+        <div class="table-content col-title">
             <h7>Final</h7>
         </div>
     </div>
@@ -93,7 +94,7 @@
     </div>
 </div>
 
-<div class="content-child" style="overflow: auto;">
+<div class="content-child">
 {% if is_student == true %}
     <h2 class="content-title">Submit a Remark Request Here</h2>
     <form id="feedback-form" method="POST" action="/marks">

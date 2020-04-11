@@ -269,7 +269,7 @@ def feedback():
                 all_feedback[feedback.feedback_id] = feedback.__dict__
 
     if request.method == 'POST' and form.validate():
-        new_feedback = Feedback(PID=form.instructor.data, q1=form.q1.data, q2=form.q1.data, q3=form.q1.data, q4=form.q1.data)
+        new_feedback = Feedback(PID=form.instructor.data, q1=form.q1.data, q2=form.q2.data, q3=form.q3.data, q4=form.q4.data)
         db.session.add(new_feedback)
         db.session.commit()
         flash("Thanks for the feedback!")

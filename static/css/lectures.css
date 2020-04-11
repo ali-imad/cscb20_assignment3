@@ -23,6 +23,23 @@
     
 }
 
+#content .lec-box-title {
+    color: white;
+    text-align: center;
+}
+
+.links {
+    font-size: 14px;
+}
+
+.col-title {
+    padding: 0 13px;
+}
+
+.col-title h7 {
+    font-size: 18px;
+}
+
 .box{
     padding: 0% 1%;
 	margin: 0% 3%;
