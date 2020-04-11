@@ -14,6 +14,7 @@ app.secret_key = secrets.token_hex(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignment3.db'
 db = SQLAlchemy(app)
 
+# from: https://www.youtube.com/watch?v=UK57IHzSh8I 
 # grabbing tables
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
@@ -25,9 +26,12 @@ Students = Base.classes.students
 Instructors = Base.classes.instructors
 Feedback = Base.classes.feedback
 
-
+# from: https://stackoverflow.com/questions/44405708/flask-doesnt-print-to-console
 LOG = create_logger(app)
 
+# from: 
+# https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/ 
+# https://wtforms.readthedocs.io/en/stable/fields.html 
 
 #### CLASSES ####
 class RegisterForm(Form):
@@ -77,12 +81,6 @@ class FeedbackForm(Form):
     instructor = SelectField("Instructor of interest", choices=[])
 
 
-##### authentication #####
-# partly inspired by tutorial at
-# https://pythonspot.com/login-authentication-with-flask/ 
-# and https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login 
-
-
 @app.route('/')
 def root():
     # cookie check
@@ -96,6 +94,15 @@ def root():
         instructor_info = session.get('intructor_info')
         all_students = session.get('all_students')
         return render_template('index.html', instructor_info=instructor_info, all_students=all_students, is_student=session.get('student'))
+
+##### authentication #####
+# partly inspired by tutorial at
+# https://pythonspot.com/login-authentication-with-flask/ 
+# and https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login 
+# and form handling via https://flask.palletsprojects.com/en/1.1.x/patterns/wtforms/ 
+
+# we didn't use any one particular source, rather we learned
+# things from various sources and applied those techniques to our functions
 
 @app.route('/login', methods=['GET', 'HEAD'])
 def not_logged_in():
@@ -140,13 +147,12 @@ def login():
 @app.route('/logout')
 def logout():
     if session.get('student'):
-        LOG.info("Goodbye, student")
         session.pop('student',None)
     elif session.get('instructor'):
-        LOG.info("Goodbye, instructor")
         session.pop('instructor',None)
     session.pop('ID',None)
     return redirect('/')
+
 
 @app.route('/register', methods=['GET', 'HEAD'])
 def not_registered(): 
